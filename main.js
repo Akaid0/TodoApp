@@ -1,7 +1,7 @@
 window.addEventListener('load', () => { //Ce qui doit se passer dès qu'on charge la page
-	todos = JSON.parse(localStorage.getItem('todos')) || [];
+	todos = JSON.parse(localStorage.getItem('todos')) || []; //defini todos comme le chemin permettant de recuperer les donnes de localStorage
 	const nameInput = document.querySelector('#name'); //#name = id in html doc
-	const newTodoForm = document.querySelector('#new-todo-form');
+	const newTodoForm = document.querySelector('#new-todo-form'); //queryselector return le premier element correspondant a cette id
 
 	const username = localStorage.getItem('username') || ''; //ordre des const pas important
 
@@ -11,8 +11,8 @@ window.addEventListener('load', () => { //Ce qui doit se passer dès qu'on charg
 		localStorage.setItem('username', e.target.value);
 	}) //change le nom dans localStorage quand changer sur la page
 
-	newTodoForm.addEventListener('submit', e => {
-		e.preventDefault(); //fonction determine ce qu'il se passe quand on remplit le formulaire et les infos qu'il recupere
+	newTodoForm.addEventListener('submit', e => { //fonction determine ce qu'il se passe quand on remplit le formulaire et les infos qu'il recupere
+		e.preventDefault(); //empeche l'event de se produire si c'est possible(en cas d'erreur de la fonction)
 
 		const todo = { //ce qu'un nouvel element va contenir et ou il va les chercher dans le html
 			content: e.target.elements.content.value, 
@@ -21,9 +21,9 @@ window.addEventListener('load', () => { //Ce qui doit se passer dès qu'on charg
 			createdAt: new Date().getTime()
 		}
 
-		todos.push(todo); //save le nouvel element dans localstorage
+		todos.push(todo); //return la nouvelle array de todo dans todos
 
-		localStorage.setItem('todos', JSON.stringify(todos));
+		localStorage.setItem('todos', JSON.stringify(todos)); //save le nouvel element dans localstorage
 
 		// Reset the form
 		e.target.reset();
@@ -36,14 +36,14 @@ window.addEventListener('load', () => { //Ce qui doit se passer dès qu'on charg
 
 function DisplayTodos () { //la fonction determine comment s'affiche le nouvel element et les interactions possible
 	const todoList = document.querySelector('#todo-list'); // pour connecter à la div todo-list qui contient les element
-	todoList.innerHTML = "";
+	todoList.innerHTML = ""; //Demande a la fonction d'écrire en HTML
 
-	todos.forEach(todo => {
+	todos.forEach(todo => { //pour chaque element dans todos (=todo) procede la fonction suivante
 		const todoItem = document.createElement('div'); //crée une div HTML pour chaque nouvel element de la todo
-		todoItem.classList.add('todo-item');
-
-		const label = document.createElement('label');
-		const input = document.createElement('input');
+		todoItem.classList.add('todo-item'); //ajoute les elements contenu dans todo-item (class HTML) à la div creer ci dessus
+						     //add() est un attribut de classList() comme remove() item() toggle() contains() ou replace ()
+		const label = document.createElement('label');  //createElement crée un élément html reconnu par le tagname
+		const input = document.createElement('input');  //input défini en HTML un element modifiables par l'utilisateur en fonction de son type=
 		const span = document.createElement('span');
 		const content = document.createElement('div'); //Defini les variables pour creer le HTML de l'element
 		const actions = document.createElement('div');
