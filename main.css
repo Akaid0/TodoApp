@@ -106,6 +106,10 @@ input[type="checkbox"] {
     display: none;
 }
 
+input[type=checkbox]{
+  -webkit-appearance:checkbox;
+} 
+
 .bubble {
     display: flex;
     align-items: center;
